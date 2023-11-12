@@ -12,5 +12,12 @@ This repository is to hold the backend API design and code for the Cart Product.
 - Run `npm run start` (for production environment) or `npm run dev` (for development).
 - Your app would be running on the defined port.
 
+### Generate Swagger API Docs
+- To auto-generate Swagger Docs, use `npm run generate:doc`.
+- This will generate `swagger.json`.
+- Now, when you run the app (either using `npm run start` or `npm run dev`) and go to `/api-docs` on browser, you can find the Swagger API Doc.
+
+**Note**: Every time you change API routes, make sure to generate swagger API docs to keep it up-to-date.
+
 ### ExpressJS template code
 This app's starter code is generated using [ExpressJS template](https://expressjs.com/en/starter/generator.html) and EJS for views.
