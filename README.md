@@ -13,4 +13,4 @@ This repository is to hold the backend API design and code for the Cart Product.
 - Your app would be running on the defined port.
 
 ### ExpressJS template code
-This app's starter code is generated using [ExpressJS template](https://expressjs.com/) and EJS for views.
+This app's starter code is generated using [ExpressJS template](https://expressjs.com/en/starter/generator.html) and EJS for views.
