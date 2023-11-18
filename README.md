@@ -4,7 +4,7 @@ Cart SaaS project is all about creating a cart product which can be integrated i
 This repository is to hold the backend API design and code for the Cart Product.
 ## First steps first
 ### UML Design
-**Up to date** @: ![ERD from local database](resources/image.png)
+**Up to date** @: ![ERD from local database](resources/carro_v0.2.png)
 
 ### How to run the app for the first time (in development environment)
 - Install all the dependent packages using `npm install`.
