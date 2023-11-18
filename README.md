@@ -4,12 +4,15 @@ Cart SaaS project is all about creating a cart product which can be integrated i
 This repository is to hold the backend API design and code for the Cart Product.
 ## First steps first
 ### UML Design
-**WIP** @: https://dbdiagram.io/d/653d5e77ffbf5169f0a5d343
+**Up to date** @: ![ERD from local database](resources/image.png)
 
-### How to run the app
+### How to run the app for the first time (in development environment)
 - Install all the dependent packages using `npm install`.
 - Create environment variables in production environment or `.env` file using `.env.example` in development environment.
-- Run `npm run start` (for production environment) or `npm run dev` (for development).
+- Make sure you have started the postgresql server whose url you kept in `.env`'s `DB_URL`.
+- Run `npm run prisma-migrate` to setup your database (with the required tables).
+- Run `npm run prisma-seed` to fill in example data to the tables (only run if necessary) (**Node**: Skip this, since its WIP.)
+- Finally, run `npm run start` (for production environment) or `npm run dev` (for development).
 - Your app would be running on the defined port.
 
 ### Generate Swagger API Docs
