@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+enum Gender {
+  Male
+  Female
+  Other
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  fullName        String?
+  email           String?           @unique
+  phone           String?           @unique
+  gender          Gender?
+  dob             String?
+  createdAt       DateTime          @default(now())
+  Order           Order[]
+  ShippingAddress ShippingAddress[]
+}
+
+model Merchant {
+  id             Int       @id @default(autoincrement())
+  name           String
+  adminId        String    @unique
+  displayAddress String?
+  createdAt      DateTime  @default(now())
+  Product        Product[]
+}
+
+enum AvailabilityStatus {
+  IN_STOCK
+  OUT_OF_STOCK
+}
+
+model Product {
+  id                      Int                @id @default(autoincrement())
+  merchantId              Int
+  merchant                Merchant           @relation(fields: [merchantId], references: [id])
+  name                    String
+  price                   Float
+  availabilityStatus      AvailabilityStatus @default(OUT_OF_STOCK)
+  createdAt               DateTime           @default(now())
+  restrictedShippingCodes String?
+  OrderItem               OrderItem[]
+}
+
+enum OrderStatus {
+  Success // Order is completed and cart is no more needed
+  Active // Cart has not been checkedout yet but has user details linked
+  Partial // Cart has not been checkedout yet and has no user details linked
+  Failed // Cart is discarded
+}
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id])
+  status    OrderStatus
+  createdAt DateTime    @default(now())
+  OrderItem OrderItem[]
+}
+
+model OrderItem {
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     @default(1)
+
+  @@id([orderId, productId])
+}
+
+model ShippingAddress {
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  user        User    @relation(fields: [userId], references: [id])
+  name        String?
+  phone       String?
+  email       String?
+  addressLine String?
+  pincode     String
+  state       String
+}
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
+
+// model User {
+//   id    Int     @id @default(autoincrement())
+//   email String  @unique
+//   name  String?
+//   posts Post[]
+// }
+
+// model Post {
+//   id        Int      @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   title     String
+//   content   String?
+//   published Boolean  @default(false)
+//   viewCount Int      @default(0)
+//   author    User?    @relation(fields: [authorId], references: [id])
+//   authorId  Int?
+// }
