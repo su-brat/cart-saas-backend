@@ -1,6 +1,6 @@
 require("dotenv").config();
 module.exports = {
-  prod_env:
-    process.env.NODE_ENV === "prod" || process.env.NODE_ENV === "production",
+  dev_env:
+    process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "development",
   url: `http://localhost:${process.env.PORT}`,
 };

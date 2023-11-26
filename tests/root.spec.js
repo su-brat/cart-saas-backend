@@ -1,6 +1,6 @@
-const { prod_env, url } = require("./config/variables");
+const { dev_env, url } = require("./config/variables");
 
-if (!prod_env) {
+if (dev_env) {
   const { test, expect } = require("@playwright/test");
 
   test("root health check", async ({ page }) => {
