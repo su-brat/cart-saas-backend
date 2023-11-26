@@ -17,10 +17,14 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run node app
-        run: npm start
+      - name: Start Node App
+        run: npm start &
+      - name: Wait for App to Start
+        run: sleep 10s
       - name: Run Playwright tests
         run: npx playwright test
+      - name: Stop Node App
+        run: pkill -f "npm start"
       - uses: actions/upload-artifact@v3
         if: always()
         with:
