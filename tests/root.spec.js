@@ -5,6 +5,6 @@ if (dev_env) {
 
   test("root health check", async ({ page }) => {
     const response = await page.goto(`${url}/`);
-    expect(response.status()).toEqual(200);
+    expect(response.status()).toEqual(300);
   });
 }
