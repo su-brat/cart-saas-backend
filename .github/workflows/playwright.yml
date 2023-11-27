@@ -8,11 +8,19 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      # Setting environment variables with the values of repository variables
+      NODE_ENV: ${{ vars.NODE_ENV }}
+      PORT: ${{ vars.PORT }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Display Environment Variables
+        run: |
+          echo "NODE_ENV: ${{ env.NODE_ENV }}"
+          echo "PORT: ${{ env.PORT }}"
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
