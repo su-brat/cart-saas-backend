@@ -7,8 +7,8 @@
 var app = require("../app");
 var debug = require("debug")("cart-saas-backend:server");
 var http = require("http");
-var dev_env =
-  process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "development";
+
+const dev_env = ["dev", "development"].includes(process.env.NODE_ENV ?? "dev");
 
 if (dev_env) {
   require("dotenv").config();

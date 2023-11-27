@@ -12,7 +12,8 @@
     "prisma-seed": "npx prisma db seed",
     "container-services": "docker-compose up -d",
     "stop-container-services": "docker-compose down",
-    "check-running-services": "docker-compose ps"
+    "check-running-services": "docker-compose ps",
+    "kill": "npx kill-port 3000"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@playwright/test": "^1.40.0",
     "@types/node": "^20.10.0",
+    "kill-port": "^2.0.1",
     "nodemon": "^3.0.1",
     "prisma": "^5.6.0"
   },

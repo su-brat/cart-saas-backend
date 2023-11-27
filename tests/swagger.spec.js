@@ -1,10 +1,8 @@
-const { dev_env, url } = require("./config/variables");
+const { url } = require("./config/variables");
 
-if (dev_env) {
-  const { test, expect } = require("@playwright/test");
+const { test, expect } = require("@playwright/test");
 
-  test("swagger health check", async ({ page }) => {
-    const response = await page.goto(`${url}/api-docs`);
-    expect(response.status()).toEqual(200);
-  });
-}
+test("swagger health check", async ({ page }) => {
+  const response = await page.goto(`${url}/api-docs`);
+  expect(response.status()).toEqual(200);
+});
