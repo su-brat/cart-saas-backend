@@ -8,6 +8,7 @@
     "generate:doc": "node ./swagger-autogen.js",
     "prisma-migrate": "npx prisma migrate dev",
     "prisma-seed": "npx prisma db seed",
+    "prisma-reset": "npx prisma db push --force-reset",
     "container-services": "docker-compose up -d",
     "stop-container-services": "docker-compose down",
     "check-running-services": "docker-compose ps"

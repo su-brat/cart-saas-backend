@@ -4,7 +4,7 @@ Cart SaaS project is all about creating a cart product which can be integrated i
 This repository is to hold the backend API design and code for the Cart Product.
 ## First steps first
 ### UML Design
-**Up to date** @: ![ERD from local database](resources/carro_v0.2.png)
+Find the [ER diagram here](https://app.eraser.io/workspace/fOjBg1kwg6hcLzIbGOLf).
 
 ### How to run the app for the first time (in development environment)
 - Install all the dependent packages using `npm install`.
@@ -14,6 +14,7 @@ This repository is to hold the backend API design and code for the Cart Product.
 - Run `npm run prisma-seed` to fill in example data to the tables (only run if necessary) (**Node**: Skip this, since its WIP.)
 - Finally, run `npm run start` (for production environment) or `npm run dev` (for development).
 - Your app would be running on the defined port.
+- Run `npm run prisma-reset` to reset the schema (Drop all table data and apply change to schema as per prisma schema).
 
 ### Docker compose services
 To avoid manual setup, we have `docker-compose.yaml` which will help you run docker container with all the required services.
