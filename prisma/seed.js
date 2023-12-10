@@ -5,43 +5,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Started seeding..");
 
-  // Create users
-  const user1 = await prisma.user.create({
-    data: {
-      fullName: "John Doe",
-      email: "john@example.com",
-      phone: "1234567890",
-      gender: "Male",
-      dob: "1990-01-01",
-    },
-  });
-
-  const user2 = await prisma.user.create({
-    data: {
-      fullName: "Jane Doe",
-      email: "jane@example.com",
-      phone: "9876543210",
-      gender: "Female",
-      dob: "1995-05-15",
-    },
-  });
-
-  const user3 = await prisma.user.create({
-    data: {
-      fullName: "Nun Doe",
-      gender: "Female",
-      dob: "1998-04-25",
-    },
-  });
-
-  const user4 = await prisma.user.create({
-    data: {
-      fullName: "Pun Doe",
-      gender: "Other",
-      dob: "1999-01-03",
-    },
-  });
-
   // Create merchants
   const merchant1 = await prisma.merchant.create({
     data: {
@@ -56,6 +19,47 @@ async function main() {
       name: "Super Deals",
       adminId: "super-deals",
       displayAddress: "456 Broad Street, Townsville",
+    },
+  });
+
+  // Create users
+  const user1 = await prisma.user.create({
+    data: {
+      merchantId: merchant1.id,
+      fullName: "John Doe",
+      email: "john@example.com",
+      phone: "1234567890",
+      gender: "Male",
+      dob: "1990-01-01",
+    },
+  });
+
+  const user2 = await prisma.user.create({
+    data: {
+      merchantId: merchant2.id,
+      fullName: "Jane Doe",
+      email: "jane@example.com",
+      phone: "9876543210",
+      gender: "Female",
+      dob: "1995-05-15",
+    },
+  });
+
+  const user3 = await prisma.user.create({
+    data: {
+      merchantId: merchant1.id,
+      fullName: "Nun Doe",
+      gender: "Female",
+      dob: "1998-04-25",
+    },
+  });
+
+  const user4 = await prisma.user.create({
+    data: {
+      merchantId: merchant2.id,
+      fullName: "Pun Doe",
+      gender: "Other",
+      dob: "1999-01-03",
     },
   });
 

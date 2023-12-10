@@ -7,8 +7,8 @@ This repository is to hold the backend API design and code for the Cart Product.
 ## First steps first
 
 ### UML Design
+Find the [ER diagram here](https://app.eraser.io/workspace/fOjBg1kwg6hcLzIbGOLf).
 
-![ERD from database](resources/carro_v0_2.png)
 
 ### How to run the app for the first time (in development environment)
 
@@ -19,6 +19,7 @@ This repository is to hold the backend API design and code for the Cart Product.
 - Run `npm run prisma-seed` to fill in example data to the tables (only run if necessary).
 - Finally, run `npm run start` (for production environment) or `npm run dev` (for development).
 - Your app would be running on the defined port.
+- Run `npm run prisma-reset` to reset the schema (Drop all table data and apply change to schema as per prisma schema).
 
 ### Docker compose services
 
