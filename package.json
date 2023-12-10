@@ -4,14 +4,25 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "start http://localhost:4000 && nodemon ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "npx playwright test",
+    "test-report": "npx playwright show-report",
     "generate:doc": "node ./swagger-autogen.js",
     "prisma-migrate": "npx prisma migrate dev",
     "prisma-seed": "npx prisma db seed",
     "prisma-reset": "npx prisma db push --force-reset",
     "container-services": "docker-compose up -d",
     "stop-container-services": "docker-compose down",
-    "check-running-services": "docker-compose ps"
+    "check-running-services": "docker-compose ps",
+    "kill": "npx kill-port 3000",
+    "lint": "prettier --check",
+    "format": "prettier --write"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "lint-staged": {
+    "*.{js,md,json}": "prettier --write"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
@@ -25,14 +36,17 @@
     "morgan": "~1.9.1",
     "passport": "^0.6.0",
     "passport-auth0": "^1.4.4",
-    "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "kill-port": "^2.0.1",
     "nodemon": "^3.0.1",
-    "prisma": "^5.6.0"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
+    "prettier": "^3.1.0",
+    "prisma": "^5.6.0",
+    "swagger-autogen": "^2.23.7"
   }
 }
