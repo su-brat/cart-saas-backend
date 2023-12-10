@@ -7,10 +7,10 @@
 var app = require("../app");
 var debug = require("debug")("cart-saas-backend:server");
 var http = require("http");
-var prod_env =
-  process.env.NODE_ENV === "prod" || process.env.NODE_ENV === "production";
 
-if (!prod_env) {
+const dev_env = ["dev", "development"].includes(process.env.NODE_ENV ?? "dev");
+
+if (dev_env) {
   require("dotenv").config();
   console.log("PROCESS ENV VARS =", process.env);
 }
@@ -34,7 +34,7 @@ var server = http.createServer(app);
 
 server.listen(port);
 
-if (!prod_env) console.log("Running on port", port);
+if (dev_env) console.log("Running on port", port);
 
 server.on("error", onError);
 server.on("listening", onListening);
