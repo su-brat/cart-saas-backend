@@ -7,8 +7,8 @@ This repository is to hold the backend API design and code for the Cart Product.
 ## First steps first
 
 ### UML Design
-Find the [ER diagram here](https://app.eraser.io/workspace/fOjBg1kwg6hcLzIbGOLf).
 
+Find the [ER diagram here](https://app.eraser.io/workspace/fOjBg1kwg6hcLzIbGOLf).
 
 ### How to run the app for the first time (in development environment)
 
@@ -46,6 +46,15 @@ With the inclusion of `playwright`, a github workflow is set to run the tests us
 - This makes sure all the `playwright` tests pass to merge a PR.
 - This check is applied to PR with target branches as `dev` or `main`.
 - Be mindful of making changes to any environment variable being used for `playwright` tests. These variables are currently being picked from repository variables in the github actions.
+
+### Husky for pre-commit hooks
+
+`husky` is added as a dev dependency to:
+
+- Generate swagger doc json automatically before commit
+- Format staged files using `prettier` before commit
+
+**Note**: When `husky` is installed for the first time using `npm install` or `npm i`, use `npm run prepare` or `npx husky install` to initialise husky managed local scripts.
 
 ### Generate Swagger API Docs
 

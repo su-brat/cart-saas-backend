@@ -16,7 +16,8 @@
     "check-running-services": "docker-compose ps",
     "kill": "npx kill-port 3000",
     "lint": "prettier --check",
-    "format": "prettier --write"
+    "format": "prettier --write",
+    "prepare": "npx husky install"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
