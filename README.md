@@ -67,3 +67,7 @@ With the inclusion of `playwright`, a github workflow is set to run the tests us
 ### ExpressJS template code
 
 This app's starter code is generated using [ExpressJS template](https://expressjs.com/en/starter/generator.html) and EJS for views.
+
+### Highlevel API design flow
+
+- [User Address APIs](https://app.eraser.io/workspace/znFuUm5eN5gpZbJACXdk)

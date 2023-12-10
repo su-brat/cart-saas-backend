@@ -18,13 +18,16 @@ model User {
   merchantId      Int
   merchant        Merchant          @relation(fields: [merchantId], references: [id])
   fullName        String?
-  email           String?           @unique
-  phone           String?           @unique
+  email           String?
+  phone           String?
   gender          Gender?
   dob             String?
   createdAt       DateTime          @default(now())
   Order           Order[]
   ShippingAddress ShippingAddress[]
+
+  @@unique([merchantId, email])
+  @@unique([merchantId, phone])
 }
 
 model Merchant {
@@ -50,7 +53,7 @@ model Product {
   price                   Float
   availabilityStatus      AvailabilityStatus @default(OUT_OF_STOCK)
   createdAt               DateTime           @default(now())
-  restrictedShippingCodes String?
+  restrictedShippingCodes String[]
   OrderItem               OrderItem[]
 }
 
@@ -62,12 +65,14 @@ enum OrderStatus {
 }
 
 model Order {
-  id        Int         @id @default(autoincrement())
-  userId    Int
-  user      User        @relation(fields: [userId], references: [id])
-  status    OrderStatus
-  createdAt DateTime    @default(now())
-  OrderItem OrderItem[]
+  id              Int             @id @default(autoincrement())
+  userId          Int
+  user            User            @relation(fields: [userId], references: [id])
+  shippingId      Int
+  shippingAddress ShippingAddress @relation(fields: [shippingId], references: [id])
+  status          OrderStatus
+  createdAt       DateTime        @default(now())
+  OrderItem       OrderItem[]
 }
 
 model OrderItem {
@@ -81,15 +86,17 @@ model OrderItem {
 }
 
 model ShippingAddress {
-  id          Int     @id @default(autoincrement())
-  userId      Int
-  user        User    @relation(fields: [userId], references: [id])
-  name        String?
-  phone       String?
-  email       String?
-  addressLine String?
-  pincode     String
-  state       String
+  id           Int     @id @default(autoincrement())
+  userId       Int
+  user         User    @relation(fields: [userId], references: [id])
+  name         String?
+  phone        String?
+  email        String?
+  addressLine1 String?
+  addressLine2 String?
+  pincode      String
+  state        String
+  Order        Order[]
 }
 
 // datasource db {
