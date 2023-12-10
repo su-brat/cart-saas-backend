@@ -7,10 +7,7 @@
   },
   "host": "",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "paths": {
     "/": {
       "get": {
@@ -22,12 +19,97 @@
         }
       }
     },
-    "/users/": {
+    "/api/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/users/": {
       "get": {
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/address/user/{userid}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Get all the shipping address for a specific user.",
+            "example": "cs93948sf89"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of shipping address for the user.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "cs93948sf89"
+                },
+                "addressList": {
+                  "type": "array",
+                  "example": ["address1", "address2"],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/address/order/{orderid}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Get the selected shipping address for the specific order.",
+            "example": "19836478689"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shipping address for the order.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderId": {
+                  "type": "string",
+                  "example": "19836478689"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "address1"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
