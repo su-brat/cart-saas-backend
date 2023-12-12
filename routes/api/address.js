@@ -1,8 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
+var { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
+
 /* GET address with userid. */
-router.get("/user/:userid", function (req, res, next) {
+router.get("/user/:userid", async function (req, res, next) {
   /*  #swagger.parameters['userid'] = {
     in: 'path',
     description: 'Get all the shipping address for a specific user.',
@@ -16,18 +20,20 @@ router.get("/user/:userid", function (req, res, next) {
     }
   } */
 
-  // TODO: Replace the underlying code with appropriate logic
+  const addressList = await prisma.shippingAddress.findMany({
+    where: { userId: parseInt(req.params.userid) },
+  });
 
   res
     .send({
       userId: req.params.userid,
-      addressList: ["address1", "address2"],
+      addressList: addressList,
     })
     .status(200);
 });
 
 /* GET address with orderid. */
-router.get("/order/:orderid", function (req, res, next) {
+router.get("/order/:orderid", async function (req, res, next) {
   /*  #swagger.parameters['orderid'] = {
     in: 'path',
     description: 'Get the selected shipping address for the specific order.',
@@ -41,12 +47,15 @@ router.get("/order/:orderid", function (req, res, next) {
     }
   } */
 
-  // TODO: Replace the underlying code with appropriate logic
+  const order = await prisma.order.findUnique({
+    where: { id: parseInt(req.params.orderid) },
+    include: { shippingAddress: true },
+  });
 
   res
     .send({
       orderId: req.params.orderid,
-      address: "address1",
+      address: order.shippingAddress,
     })
     .status(200);
 });
