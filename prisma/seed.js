@@ -82,36 +82,14 @@ async function main() {
     },
   });
 
-  // Create orders
-  const order1 = await prisma.order.create({
-    data: {
-      userId: user1.id,
-      status: "Active",
-    },
-  });
-
-  const order2 = await prisma.order.create({
-    data: {
-      userId: user2.id,
-      status: "Success",
-    },
-  });
-
-  // Create order items
-  await prisma.orderItem.createMany({
-    data: [
-      { orderId: order1.id, productId: product1.id, quantity: 2 },
-      { orderId: order2.id, productId: product2.id, quantity: 1 },
-    ],
-  });
-
   // Create shipping addresses
   const shippingAddress1 = await prisma.shippingAddress.create({
     data: {
       userId: user1.id,
       name: user1.name,
       email: user1.email,
-      addressLine: "789 Oak Street",
+      addressLine1: "789 Oak Street",
+      addressLine2: "11th Block",
       pincode: "12345",
       state: "California",
     },
@@ -122,10 +100,35 @@ async function main() {
       userId: user2.id,
       name: user2.name,
       phone: user2.phone,
-      addressLine: "567 Pine Street",
+      addressLine1: "567 Pine Street",
       pincode: "67890",
       state: "New York",
     },
+  });
+
+  // Create orders
+  const order1 = await prisma.order.create({
+    data: {
+      userId: user1.id,
+      shippingId: shippingAddress1.id,
+      status: "Active",
+    },
+  });
+
+  const order2 = await prisma.order.create({
+    data: {
+      userId: user2.id,
+      shippingId: shippingAddress2.id,
+      status: "Success",
+    },
+  });
+
+  // Create order items
+  await prisma.orderItem.createMany({
+    data: [
+      { orderId: order1.id, productId: product1.id, quantity: 2 },
+      { orderId: order2.id, productId: product2.id, quantity: 1 },
+    ],
   });
 
   console.log("Seeding completed.");
