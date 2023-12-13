@@ -29,17 +29,7 @@
         }
       }
     },
-    "/api/users/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/address/user/{userid}": {
+    "/api/users/{userid}/addresses": {
       "get": {
         "description": "",
         "parameters": [
@@ -78,7 +68,132 @@
         }
       }
     },
-    "/api/address/order/{orderid}": {
+    "/api/addresses/": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new address.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "number",
+                  "example": 1234
+                },
+                "pincode": {
+                  "type": "string",
+                  "example": "122055"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "California"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "johndoe@mymail.com"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "9679993888"
+                },
+                "addressLine1": {
+                  "type": "string",
+                  "example": "17 Park Street"
+                },
+                "addressLine2": {
+                  "type": "string",
+                  "example": "24th Block"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Shipping address created with returned id.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "shippingAddressId": {
+                  "type": "string",
+                  "example": "19836478689"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Patch existing address.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "shippingAddressId": {
+                  "type": "number",
+                  "example": 2354
+                },
+                "userId": {
+                  "type": "number",
+                  "example": 1234
+                },
+                "pincode": {
+                  "type": "string",
+                  "example": "122055"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "California"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "johndoe@mymail.com"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "9679993888"
+                },
+                "addressLine1": {
+                  "type": "string",
+                  "example": "17 Park Street"
+                },
+                "addressLine2": {
+                  "type": "string",
+                  "example": "24th Block"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Shipping address updated."
+          }
+        }
+      }
+    },
+    "/api/orders/{orderid}/addresses": {
       "get": {
         "description": "",
         "parameters": [
