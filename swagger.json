@@ -29,7 +29,7 @@
         }
       }
     },
-    "/api/users/{userid}/addresses": {
+    "/api/user/{userid}/address": {
       "get": {
         "description": "",
         "parameters": [
@@ -68,7 +68,7 @@
         }
       }
     },
-    "/api/addresses/": {
+    "/api/address/": {
       "post": {
         "description": "",
         "parameters": [
@@ -193,7 +193,7 @@
         }
       }
     },
-    "/api/orders/{orderid}/addresses": {
+    "/api/order/{orderid}/address": {
       "get": {
         "description": "",
         "parameters": [

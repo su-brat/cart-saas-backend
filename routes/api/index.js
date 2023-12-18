@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const usersRouter = require("./users");
-const addressesRouter = require("./addresses");
-const ordersRouter = require("./orders");
+const userRouter = require("./user");
+const addressRouter = require("./address");
+const orderRouter = require("./order");
 
-router.use("/users", usersRouter);
-router.use("/addresses", addressesRouter);
-router.use("/orders", ordersRouter);
+router.use("/user", userRouter);
+router.use("/address", addressRouter);
+router.use("/order", orderRouter);
 
 router.get("/", function (req, res, next) {
   res.redirect("/api-docs");

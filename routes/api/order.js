@@ -5,7 +5,7 @@ const { fetchOrderShippingAddress } = require("../../controllers/order");
 
 /* GET address with orderid. */
 router.get(
-  "/:orderid/addresses",
+  "/:orderid/address",
   /*  #swagger.parameters['orderid'] = {
     in: 'path',
     description: 'Get the selected shipping address for the specific order.',

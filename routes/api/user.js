@@ -5,7 +5,7 @@ const { fetchUserAddresses } = require("../../controllers/user");
 
 /* GET address with userid. */
 router.get(
-  "/:userid/addresses",
+  "/:userid/address",
   /*  #swagger.parameters['userid'] = {
     in: 'path',
     description: 'Get all the shipping address for a specific user.',
