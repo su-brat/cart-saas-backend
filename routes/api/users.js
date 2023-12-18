@@ -1,12 +1,11 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-var { PrismaClient } = require("@prisma/client");
-
-const prisma = new PrismaClient();
+const { fetchUserAddresses } = require("../../controllers/user");
 
 /* GET address with userid. */
-router.get("/:userid/addresses", async function (req, res, next) {
+router.get(
+  "/:userid/addresses",
   /*  #swagger.parameters['userid'] = {
     in: 'path',
     description: 'Get all the shipping address for a specific user.',
@@ -19,17 +18,7 @@ router.get("/:userid/addresses", async function (req, res, next) {
       addressList: ['address1', 'address2']
     }
   } */
-
-  const addressList = await prisma.shippingAddress.findMany({
-    where: { userId: parseInt(req.params.userid) },
-  });
-
-  res
-    .send({
-      userId: req.params.userid,
-      addressList: addressList,
-    })
-    .status(200);
-});
+  fetchUserAddresses,
+);
 
 module.exports = router;

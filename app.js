@@ -1,14 +1,16 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-var swagger = require("./swagger");
+const swagger = require("./middlewares/swagger");
 
-var indexRouter = require("./routes/index");
+const indexRouter = require("./routes/index");
 
-var app = express();
+const handleError = require("./middlewares/errorHandling");
+
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -30,16 +32,6 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  const dev_env = ["dev", "development"].includes(req.app.get("env"));
-  console.log("ERROR:", err.message);
-  res.locals.message = err.message;
-  res.locals.error = dev_env ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  dev_env ? res.render("error") : res.send(err.message);
-});
+app.use(handleError);
 
 module.exports = app;
