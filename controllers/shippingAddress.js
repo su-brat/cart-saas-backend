@@ -1,32 +1,10 @@
-var express = require("express");
-var router = express.Router();
-
-var { PrismaClient, Prisma } = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-/* POST address. */
-router.post("/", async function (req, res, next) {
-  /*  #swagger.parameters['body'] = {
-    in: 'body',
-    description: 'Add new address.',
-    schema: {
-      userId: 1234,
-      pincode: '122055',
-      state: 'California',
-      email: 'johndoe@mymail.com',
-      name: 'John Doe',
-      phone: '9679993888',
-      addressLine1: '17 Park Street',
-      addressLine2: '24th Block'
-    }
-  } */
-  /* #swagger.responses[201] = {
-    description: 'Shipping address created with returned id.',
-    schema: {
-      shippingAddressId: '19836478689'
-    }
-  } */
+const handlePrismaClientErrorResponseStatus = require("../services/errorHandling");
+
+async function postShippingAddress(req, res, next) {
   try {
     const shippingAddressId = await prisma.shippingAddress.create({
       data: {
@@ -47,32 +25,12 @@ router.post("/", async function (req, res, next) {
       })
       .status(201);
   } catch (err) {
-    if (err instanceof Prisma.PrismaClientKnownRequestError) err.status = 400;
-    else err.status = 500;
+    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
-});
+}
 
-/* PATCH address. */
-router.patch("/", async function (req, res, next) {
-  /*  #swagger.parameters['body'] = {
-    in: 'body',
-    description: 'Patch existing address.',
-    schema: {
-      shippingAddressId: 2354,
-      userId: 1234,
-      pincode: '122055',
-      state: 'California',
-      email: 'johndoe@mymail.com',
-      name: 'John Doe',
-      phone: '9679993888',
-      addressLine1: '17 Park Street',
-      addressLine2: '24th Block'
-    }
-  } */
-  /* #swagger.responses[204] = {
-    description: 'Shipping address updated.',
-  } */
+async function patchShippingAddress(req, res, next) {
   try {
     const {
       userId,
@@ -111,10 +69,12 @@ router.patch("/", async function (req, res, next) {
 
     res.status(204).send();
   } catch (err) {
-    if (err instanceof Prisma.PrismaClientKnownRequestError) err.status = 400;
-    else err.status = 500;
+    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
-});
+}
 
-module.exports = router;
+module.exports = {
+  postShippingAddress,
+  patchShippingAddress,
+};

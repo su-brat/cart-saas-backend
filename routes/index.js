@@ -1,13 +1,13 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-var apiRouter = require("./api/index");
+const apiRouter = require("./api/index");
+
+const rootUrlHandler = require("../controllers");
 
 router.use("/api", apiRouter);
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Cart SaaS API" });
-});
+router.get("/", rootUrlHandler);
 
 module.exports = router;
