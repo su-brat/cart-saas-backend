@@ -6,8 +6,13 @@ function handleError(err, req, res, next) {
   res.locals.error = dev_env ? err : {};
 
   // render the error page
+  // NOTE: Assumption: All the handled errors are already given a status with number 4xx, 5xx etc.
   res.status(err.status || 500);
-  dev_env ? res.render("error") : res.send(err.message);
+  dev_env
+    ? res.render("error")
+    : res.statusCode === 500
+      ? res.send({ error: "Sorry, something went wrong!" })
+      : res.send({ error: err.message });
 }
 
 module.exports = handleError;
