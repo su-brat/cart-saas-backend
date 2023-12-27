@@ -68,6 +68,24 @@
         }
       }
     },
+    "/api/user/{userid}/active-order": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/address/": {
       "post": {
         "description": "",

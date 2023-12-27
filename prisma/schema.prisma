@@ -59,9 +59,8 @@ model Product {
 
 enum OrderStatus {
   Success // Order is completed and cart is no more needed
-  Active // Cart has not been checkedout yet but has user details linked
-  Partial // Cart has not been checkedout yet and has no user details linked
-  Failed // Cart is discarded
+  Active // Cart has not been checked out yet
+  Abandoned // Cart is discarded
 }
 
 model Order {

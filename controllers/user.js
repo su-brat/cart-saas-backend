@@ -22,4 +22,21 @@ async function fetchUserAddresses(req, res, next) {
   }
 }
 
-module.exports = { fetchUserAddresses };
+async function fetchUserActiveOrders(req, res, next) {
+  try {
+    const orders = await prisma.order.findMany({
+      where: { userId: parseInt(req.params.userid), status: "Active" },
+    });
+    res.send({
+      orders: orders,
+    });
+  } catch (err) {
+    handlePrismaClientErrorResponseStatus(err);
+    next(err);
+  }
+}
+
+module.exports = {
+  fetchUserAddresses,
+  fetchUserActiveOrders,
+};

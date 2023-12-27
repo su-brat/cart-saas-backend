@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { fetchUserAddresses } = require("../../controllers/user");
+const {
+  fetchUserAddresses,
+  fetchUserActiveOrders,
+} = require("../../controllers/user");
 
 /* GET address with userid. */
 router.get(
@@ -20,5 +23,7 @@ router.get(
   } */
   fetchUserAddresses,
 );
+
+router.get("/:userid/active-order", fetchUserActiveOrders);
 
 module.exports = router;
