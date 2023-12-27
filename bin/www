@@ -34,7 +34,11 @@ const server = http.createServer(app);
 
 server.listen(port);
 
-if (dev_env) console.log("Running on port", port);
+if (dev_env) {
+  console.log("Running on port", port);
+  const openBrowser = require("open");
+  openBrowser(`http://localhost:${port}`);
+}
 
 server.on("error", onError);
 server.on("listening", onListening);
