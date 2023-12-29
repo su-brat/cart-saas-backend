@@ -14,8 +14,18 @@ router.get(
   /* #swagger.responses[200] = {
     description: 'Shipping address for the order.',
     schema: {
-      orderId: '19836478689',
-      address: 'address1'
+      "orderId": "1",
+      "address": {
+        "id": 1,
+        "userId": 1,
+        "name": "John Doe",
+        "phone": "9384934837",
+        "email": "john@example.com",
+        "addressLine1": "789 Oak Street",
+        "addressLine2": "11th Block",
+        "pincode": "12345",
+        "state": "California"
+      }
     }
   } */
   fetchOrderShippingAddress,

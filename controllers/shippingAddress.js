@@ -2,8 +2,6 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const handlePrismaClientErrorResponseStatus = require("../services/errorHandling");
-
 async function postShippingAddress(req, res, next) {
   try {
     const shippingAddressId = await prisma.shippingAddress.create({
@@ -25,7 +23,6 @@ async function postShippingAddress(req, res, next) {
       })
       .status(201);
   } catch (err) {
-    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
 }
@@ -69,7 +66,6 @@ async function patchShippingAddress(req, res, next) {
 
     res.status(204).send();
   } catch (err) {
-    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
 }

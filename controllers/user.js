@@ -2,14 +2,16 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const handlePrismaClientErrorResponseStatus = require("../services/errorHandling");
+const {
+  getValidatedUserIdOrThrowError,
+} = require("../services/paramValidation");
 
 async function fetchUserAddresses(req, res, next) {
   try {
+    const userId = getValidatedUserIdOrThrowError(req.params.userid);
     const addressList = await prisma.shippingAddress.findMany({
-      where: { userId: parseInt(req.params.userid) },
+      where: { userId: userId },
     });
-
     res
       .send({
         userId: req.params.userid,
@@ -17,21 +19,24 @@ async function fetchUserAddresses(req, res, next) {
       })
       .status(200);
   } catch (err) {
-    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
 }
 
 async function fetchUserActiveOrders(req, res, next) {
   try {
+    const userId = getValidatedUserIdOrThrowError(req.params.userid);
     const orders = await prisma.order.findMany({
-      where: { userId: parseInt(req.params.userid), status: "Active" },
+      where: { userId: userId, status: "Active" },
+      include: {
+        OrderItem: true, // Include list of order items
+      },
     });
     res.send({
+      userId: userId,
       orders: orders,
     });
   } catch (err) {
-    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
 }

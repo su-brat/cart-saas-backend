@@ -1,8 +1,15 @@
 const { Prisma } = require("@prisma/client");
+const { RequestValidationError } = require("./customErrors");
 
-function handlePrismaClientErrorResponseStatus(err) {
-  if (err instanceof Prisma.PrismaClientKnownRequestError) err.status = 400;
-  else err.status = 500;
+function handleErrorStatusCode(err) {
+  if (err.statusCode) return; // specific status code preceeds generic status code
+  if (
+    err instanceof RequestValidationError ||
+    err instanceof Prisma.PrismaClientValidationError ||
+    err instanceof Prisma.PrismaClientKnownRequestError
+  )
+    err.statusCode = 400;
+  else err.statusCode = 500;
 }
 
-module.exports = handlePrismaClientErrorResponseStatus;
+module.exports = handleErrorStatusCode;

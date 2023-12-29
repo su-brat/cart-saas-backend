@@ -39,7 +39,7 @@
             "required": true,
             "type": "string",
             "description": "Get all the shipping address for a specific user.",
-            "example": "cs93948sf89"
+            "example": "9237493"
           }
         ],
         "responses": {
@@ -50,13 +50,47 @@
               "properties": {
                 "userId": {
                   "type": "string",
-                  "example": "cs93948sf89"
+                  "example": "2"
                 },
                 "addressList": {
                   "type": "array",
-                  "example": ["address1", "address2"],
                   "items": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "userId": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Alex Rider"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "example": "9876543210"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "alex@somemail.com"
+                      },
+                      "addressLine1": {
+                        "type": "string",
+                        "example": "567 Pine Street"
+                      },
+                      "addressLine2": {},
+                      "pincode": {
+                        "type": "string",
+                        "example": "67890"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "New York"
+                      }
+                    }
                   }
                 }
               },
@@ -76,12 +110,74 @@
             "name": "userid",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Get all active cart orders for a specific user.",
+            "example": "9237493"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of active cart orders for the user.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "number",
+                  "example": 1
+                },
+                "orders": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "userId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "shippingId": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Active"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2023-12-25T17:52:30.348Z"
+                      },
+                      "OrderItem": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "orderId": {
+                              "type": "number",
+                              "example": 1
+                            },
+                            "productId": {
+                              "type": "number",
+                              "example": 1
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "example": 2
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -232,11 +328,48 @@
               "properties": {
                 "orderId": {
                   "type": "string",
-                  "example": "19836478689"
+                  "example": "1"
                 },
                 "address": {
-                  "type": "string",
-                  "example": "address1"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "userId": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "9384934837"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "john@example.com"
+                    },
+                    "addressLine1": {
+                      "type": "string",
+                      "example": "789 Oak Street"
+                    },
+                    "addressLine2": {
+                      "type": "string",
+                      "example": "11th Block"
+                    },
+                    "pincode": {
+                      "type": "string",
+                      "example": "12345"
+                    },
+                    "state": {
+                      "type": "string",
+                      "example": "California"
+                    }
+                  }
                 }
               },
               "xml": {
