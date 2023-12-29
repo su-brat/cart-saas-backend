@@ -2,19 +2,17 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const createError = require("http-errors");
-
-const handlePrismaClientErrorResponseStatus = require("../services/errorHandling");
+const {
+  getValidatedOrderIdOrThrowError,
+} = require("../services/paramValidation");
 
 async function fetchOrderShippingAddress(req, res, next) {
   try {
+    const orderId = getValidatedOrderIdOrThrowError(req.params.orderid);
     const order = await prisma.order.findUnique({
-      where: { id: parseInt(req.params.orderid) },
+      where: { id: orderId },
       include: { shippingAddress: true },
     });
-
-    if (!order) return next(createError(404));
-
     res
       .send({
         orderId: req.params.orderid,
@@ -22,7 +20,6 @@ async function fetchOrderShippingAddress(req, res, next) {
       })
       .status(200);
   } catch (err) {
-    handlePrismaClientErrorResponseStatus(err);
     next(err);
   }
 }
