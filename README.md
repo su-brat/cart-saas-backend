@@ -71,3 +71,7 @@ This app's starter code is generated using [ExpressJS template](https://expressj
 ### Highlevel API design flow
 
 - [User Address APIs](https://app.eraser.io/workspace/znFuUm5eN5gpZbJACXdk)
+
+## Past Activity
+
+![Alt](https://repobeats.axiom.co/api/embed/d5b93ca61bb94ef9d6e7dfa08ad3c0f779df51c6.svg "Repobeats analytics image")
